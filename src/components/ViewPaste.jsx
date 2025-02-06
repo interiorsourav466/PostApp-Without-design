@@ -13,7 +13,7 @@ const ViewPaste = () => {
     const {id}=useParams();
     const allPastes=useSelector((state) => state.paste.pastes);
 
-const paste = allPastes.find((p) => p._id === id);
+const paste = allPastes.find((p) => p._id === id) || {};
 
 console.log("Final Paste: " + paste);
   return (
@@ -23,7 +23,7 @@ console.log("Final Paste: " + paste);
         className='p-1 rounded-2xl mt-2 w-[66%] h-10 pl-4 focus:outline-none focus:ring-0 focus:border-0'
         type="text" 
         placeholder='enter title here'
-        value={paste.title}
+        value={paste?.title || ''} 
         disabled
         onChange={(e) => setTitle(e.target.value)}
         />
@@ -36,8 +36,9 @@ console.log("Final Paste: " + paste);
     </div>
     <div className='mt-8'>
             <textarea 
-            className='rounded-2xl mt-4, min-w-[500px] p-4'
-            value={paste.content}
+            className='rounded-2xl mt-4 min-w-[500px] p-4'
+            
+            value={paste?.content || ''}
             disabled
             placeholder='enter content here'
             onChange={(e)=>setValue(e.target.value)}

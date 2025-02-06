@@ -13,15 +13,15 @@ const Home = () => {
     const dispatch =useDispatch();
     const allPastes=useSelector((state) =>state.paste.pastes);
 
-    useEffect(()=>{
-        console.log('inside use effect');
-        if(pasteId){
-            const paste=allPastes.find((p)=>p._id===pasteId);
+   useEffect(()=>{
+    if (pasteId) {
+        const paste = allPastes.find((p) => p._id === pasteId);
+        if (paste) {
             setTitle(paste.title);
             setValue(paste.content);
         }
-        
-    },[pasteId])
+    }
+}, [pasteId, allPastes]);
 
     function createPaste(){
         const paste={
@@ -62,7 +62,7 @@ const Home = () => {
     </div>
     <div className='mt-8'>
             <textarea 
-            className='rounded-2xl mt-4, min-w-[500px] p-4'
+            className='rounded-2xl mt-4 min-w-[500px] p-4'
             value={value}
             placeholder='enter content here'
             onChange={(e)=>setValue(e.target.value)}
